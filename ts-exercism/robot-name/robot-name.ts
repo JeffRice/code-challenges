@@ -1,12 +1,12 @@
 export class Robot {
+  private static ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
  robotName: string = ''
   
   constructor() {
     let unq = false
     while(unq === false){
-    let alphaString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let robotName = ''
-    while(robotName.length<2){ robotName += alphaString[getRandomIntInclusive(0,25)]  }
+    while(robotName.length<2){ robotName += Robot.ALPHABET[getRandomIntInclusive(0,25)]  }
     while(robotName.length<5){ robotName += getRandomIntInclusive(0,9)  }
     this.robotName = robotName
       if (usedNames.has(robotName) === false){
@@ -23,9 +23,8 @@ export class Robot {
   public resetName(): void {
     let unq = false
     while(unq === false){
-    let alphaString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let robotName = ''
-    while(robotName.length<2){ robotName += alphaString[getRandomIntInclusive(0,25)]  }
+    while(robotName.length<2){ robotName += Robot.ALPHABET[getRandomIntInclusive(0,25)]  }
     while(robotName.length<5){ robotName += getRandomIntInclusive(0,9)  }
     this.robotName = robotName
       if (usedNames.has(robotName) === false){

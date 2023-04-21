@@ -1,11 +1,11 @@
 export class SimpleCipher {
   key: string
+  private static ALPHA = 'abcdefghijklmnopqrstuvwxyz'
 
   constructor(subKey: string='default') {
     if(subKey === 'default'){
-      let randomString = 'abcdefghijklmnopqrstuvwxyz';
       let randomKey = ''
-      while(randomKey.length<100){ randomKey += randomString[getRandomIntInclusive(0,25)]  }
+      while(randomKey.length<100){ randomKey += SimpleCipher.ALPHA[getRandomIntInclusive(0,25)]  }
       this.key = randomKey
     }
       else{
@@ -14,30 +14,27 @@ export class SimpleCipher {
   }
   
   encode(message: string):string {
-    let randomString = 'abcdefghijklmnopqrstuvwxyz';
     let splitMsg = message.split('')
     let encodedMsg = ''
     let keyIndex = 0
           for( const s of splitMsg  ){
-            let adjustedIndex = randomString.indexOf(s) + randomString.indexOf(this.key[keyIndex])
+            let adjustedIndex = SimpleCipher.ALPHA.indexOf(s) + SimpleCipher.ALPHA.indexOf(this.key[keyIndex])
             if(adjustedIndex>25){adjustedIndex-=26}
             keyIndex++; if(keyIndex>this.key.length-1){keyIndex=0}
-            encodedMsg += randomString.charAt( adjustedIndex )
+            encodedMsg += SimpleCipher.ALPHA.charAt( adjustedIndex )
           }
     return encodedMsg
   }
 
   decode(encrypted: string):string {
-       let randomString = 'abcdefghijklmnopqrstuvwxyz';
        let splitEnc = encrypted.split('')
        let decodedMsg = ''
        let keyIndex = 0
         for( const s of splitEnc  ){
-            let adjustedIndex =  randomString.indexOf(s) - randomString.indexOf(this.key[keyIndex])        
-           //   - randomString.indexOf(this.key[keyIndex])   
+            let adjustedIndex =  SimpleCipher.ALPHA.indexOf(s) - SimpleCipher.ALPHA.indexOf(this.key[keyIndex])   
              if(adjustedIndex<0){adjustedIndex+=26}
             keyIndex++; if(keyIndex>this.key.length-1){keyIndex=0}
-            decodedMsg += randomString.charAt( adjustedIndex )
+            decodedMsg += SimpleCipher.ALPHA.charAt( adjustedIndex )
           }
     return decodedMsg
   }
